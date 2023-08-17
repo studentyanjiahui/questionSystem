@@ -7,4 +7,5 @@
 
 ![image](https://github.com/studentyanjiahui/questionSystem/assets/100705236/33f68f0d-e08e-43ba-900c-b97ad6fc3e98)
 
-
+# 设计思想
+借助vue的store存储登录状态，在router中设置某些页面非登录状态不可访问，缺点是存储在本地，容易被用户篡改，从而使得即使设置了权限管理也不安全，应当向token那样借助后端服务器进行访问，与cookie相适应，既能保证效率有使安全性提高。
