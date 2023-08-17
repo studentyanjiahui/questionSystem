@@ -1,0 +1,69 @@
+数据库起名为questionnaire
+用户表名称为userTable(id,name,password)
+总体sql语句为：
+use `questionnaire`
+drop table if exists `userTable`;
+create table `userTable`(
+      `id` int not null auto_increment,
+      `name` varchar(30) not null,
+      `pswd` varchar(40) not null,
+       primary key(`id`)
+     )auto_increment=1;
+
+ insert into `userTable` values (1,"用户1",'123456');
+ insert into `userTable` values (2,'user2','123456');
+
+ drop table if exists `naires`;
+ create table `naires`(
+     `id` int not null auto_increment,
+     `title` varchar(100) not null,
+     `description` varchar(300),
+     primary key(`id`)
+ )auto_increment=1;
+
+ insert into `naires` values (1,"调查测试1","仅做测试用");
+ insert into `naires`(`title`,`description`) values("调查测试2",null);
+
+ drop table if exists `naireContent`;
+ create table `naireContent`(
+     `id` int not null,
+     `num` int not null,
+     `question` varchar(100) not null,
+     `type` smallint default 0 not null,
+     `option1` varchar(60),
+     `option2` varchar(60),
+     `option3` varchar(60),
+     `option4` varchar(60),
+     `option5` varchar(60),
+     `answer` varchar(80),
+     primary key(`id`,`num`)
+ );
+
+ insert into `naireContent` values(2,1,"功能是否正常",0,"正常","有故障","尚在测试中",null,null,null);
+ insert into `naireContent` values(2,2,"界面感受如何",0,"较好","不好","很好","一般","极差",null);
+ insert into `naireContent` values(1,1,"功能多选",1,"选择1","选择2","选择3","选择4",null,null);
+
+ drop table if exists `answerSum`;
+ create table `answerSum`(
+    `id` int not null,
+    `num` int not null,
+    `answer` varchar(300) not null,
+    `writer` varchar(40) not null,
+    primary key(`id`,`num`,`writer`)
+ );
+
+insert into `answerSum` values(1,1,'A','write123');
+insert into `answerSum` values(1,1,'A,C','write1');
+insert into `answerSum` values(1,1,'C,D','write2');
+insert into `answerSum` values(1,1,'A','write12');
+insert into `answerSum` values(2,1,'A','write1');
+insert into `answerSum` values(2,2,'B','write1');
+insert into `answerSum` values(2,1,'C','write12');
+insert into `answerSum` values(2,2,'A','write12');
+insert into `answerSum` values(2,2,'A','write123');
+insert into `answerSum` values(2,1,'B','write123');
+insert into `answerSum` values(2,1,'A','212345');
+insert into `answerSum` values(2,2,'C','212345');
+
+ #naireContent中的num为其在问卷中的编号,
+ #type为0表示单选，为1表示多选，为3表示简答
