@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.myquestionnaire.mapper.QuestionMapper">
+    <select id="getAllNaire" resultType="com.example.myquestionnaire.util.naireInfo">
+        select * from naires;
+    </select>
+
+    <delete id="delRecord" parameterType="com.example.myquestionnaire.RequestObject.RequestId">
+        delete from naires where id=#{id} and title=#{title};
+    </delete>
+
+    <insert id="insertRecord" parameterType="com.example.myquestionnaire.RequestObject.RequestNaire">
+        insert into naires(title,description) values (#{title},#{description})
+    </insert>
+
+    <select id="searchID" resultType='java.lang.Integer'>
+        select id from naires where title = #{title} and description = #{description}
+    </select>
+
+    <select id="getOneQues" resultType="com.example.myquestionnaire.util.QuesInfo">
+        select * from naireContent where id=#{Qid}
+    </select>
+
+    <insert id="addOneJuan" parameterType="com.example.myquestionnaire.util.NewJuan">
+        insert into naireContent(id,num,question,type,option1,option2,option3,option4,option5) values (#{id},#{num},#{question},#{type},#{option1},#{option2},#{option3},#{option4},#{option5})
+    </insert>
+
+    <select id="getAnalyze" resultType="com.example.myquestionnaire.util.JuanAnalyze">
+        select num,writer,answer from answerSum where id=#{id} order by num,answer asc
+    </select>
+
+    <insert id="addOneAnswer" parameterType="com.example.myquestionnaire.RequestObject.RequestAnswer">
+        insert into answerSum values(#{id},#{num},#{answer},#{writer})
+    </insert>
+</mapper>
